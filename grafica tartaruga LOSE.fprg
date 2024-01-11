@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="vicarilor08"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-01-11 11:02:55 "/>
+        <attribute name="created" value="dmljYXJpbG9yMDg7QzAyLTEwOzIwMjQtMDEtMTE7IjEwOjQzOjEwICI7MjU1Nw=="/>
+        <attribute name="edited" value="dmljYXJpbG9yMDg7QzAyLTEwOzIwMjQtMDEtMTE7IjExOjAyOjU1ICI7MTsyNjcw"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <forward expression="30" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="70" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="70" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="40" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="40" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+        </body>
+    </function>
+</flowgorithm>
