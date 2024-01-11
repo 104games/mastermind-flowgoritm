@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="vicarilor08"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-01-10 08:41:59 "/>
+        <attribute name="created" value="dmljYXJpbG9yMDg7QzAyLTEwOzIwMjQtMDEtMTA7IjA4OjE0OjEzICI7MjU2NA=="/>
+        <attribute name="edited" value="dmljYXJpbG9yMDg7QzAyLTEwOzIwMjQtMDEtMTA7IjA4OjQxOjU5ICI7ODsyNjg5"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <turn expression="90" rotate="left"/>
+            <forward expression="200" pen="up"/>
+            <turn expression="60" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="110" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="110" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="120" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="120" rotate="left"/>
+            <forward expression="80" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="140" rotate="right"/>
+            <forward expression="115" pen="down"/>
+            <turn expression="140" rotate="left"/>
+            <forward expression="90" pen="down"/>
+        </body>
+    </function>
+</flowgorithm>
