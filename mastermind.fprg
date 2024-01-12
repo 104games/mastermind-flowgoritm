@@ -1,19 +1,42 @@
 <?xml version="1.0"?>
-<flowgorithm fileversion="3.0">
+<flowgorithm fileversion="4.0">
     <attributes>
         <attribute name="name" value=""/>
         <attribute name="authors" value="Gabriella"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2024-01-07 04:38:23 "/>
+        <attribute name="saved" value="2024-01-12 03:33:03 "/>
         <attribute name="created" value="R2FicmllbGxhO0dBQlJJRUxMQTIwODE7MjAyNC0wMS0wNzsiMTA6NDI6NTggIjsyOTM2"/>
         <attribute name="edited" value="R2FicmllbGxhO0dBQlJJRUxMQTIwODE7MjAyNC0wMS0wNzsiMDQ6Mzg6MjMgIjs2OzMwNDk="/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI2OjM5ICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMTsiMTA6NDM6MTAgIjtncmFmaWNhIHRhcnRhcnVnYSBMT1NFLmZwcmc7ODA4OQ=="/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI3OjQyICI7MTtnYXJpbWJnYWIwODtDMDItMjI7MjAyNC0wMS0xMTsiMTA6NDk6MzkgIjtzYXNhc2FzYXNhc2FzYXNhc2EuZnByZzs3OTA2"/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI4OjIxICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMDsiMDg6MTQ6MTMgIjtHcmFmaWNhIHRhcnRhcnVnYSBtYXN0ZXJtaW5kLmZwcmc7ODgyNg=="/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjMzOjAzICI7MjsyODY5"/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
         <body>
-            <declare name="p, x, n, vita" type="Integer" array="False" size=""/>
+            <declare name="p, x, n, vita, punti, pos, tot, hight" type="Integer" array="False" size=""/>
+            <declare name="scopri" type="String" array="False" size=""/>
             <declare name="fine" type="Boolean" array="False" size=""/>
             <assign variable="fine" expression="false"/>
+            <open expression="&quot;champion.txt&quot;" mode="read"/>
+            <read variable="hight"/>
+            <close mode="read"/>
+            <open expression="&quot;history.txt&quot;" mode="read"/>
+            <assign variable="tot" expression="0"/>
+            <while expression="!EOF()">
+                <read variable="scopri"/>
+                <assign variable="tot" expression="tot+1"/>
+            </while>
+            <close mode="read"/>
+            <declare name="scores" type="String" array="True" size="tot"/>
+            <open expression="&quot;history.txt&quot;" mode="read"/>
+            <assign variable="pos" expression="0"/>
+            <while expression="!EOF()">
+                <read variable="scores[pos]"/>
+                <assign variable="pos" expression="pos+1"/>
+            </while>
+            <close mode="read"/>
             <output expression="&quot;benvenuto su mastermind! in quanti volete giocare oggi?&quot;" newline="True"/>
             <input variable="p"/>
             <declare name="players" type="String" array="True" size="p"/>
@@ -139,9 +162,8 @@
                 <while expression="coloriPOStemp[rnd] == &quot;x&quot;">
                     <assign variable="rnd" expression="Random(Size(coloriPOS))"/>
                 </while>
-                <assign variable="combinazione[x]" expression="coloriPOStemp[x]"/>
-                <assign variable="coloriPOStemp[x]" expression="&quot;x&quot;"/>
-                <output expression="combinazione[x]" newline="True"/>
+                <assign variable="combinazione[x]" expression="coloriPOStemp[rnd]"/>
+                <assign variable="coloriPOStemp[rnd]" expression="&quot;x&quot;"/>
             </for>
             <output expression="&quot;inizia la partita! ora a turno ogni giocatore prover&#224; ad indovinare la combinazione&quot;" newline="True"/>
             <declare name="i, y, t, g, rossi, gialli" type="Integer" array="False" size=""/>
@@ -151,6 +173,7 @@
                 <output expression="coloriPOS[x]" newline="True"/>
             </for>
             <output expression="&quot;quando andrete a scivere la combinazione, dovrete scriverla tutta su una linea, separando ogni colore con sono spazi! es: bianco blu rosso giallo&quot;" newline="True"/>
+            <call expression="tartSTART()"/>
             <declare name="vincitore" type="String" array="False" size=""/>
             <while expression="fine == false">
                 <for variable="i" start="vita" end="0" direction="dec" step="1">
@@ -199,6 +222,8 @@
                                     <else>
                                         <assign variable="fine" expression="true"/>
                                         <output expression="&quot;BRAVO! &quot;&amp;players[x]&amp;&quot; sei il vincitore! grazie di aver giocato!&quot;" newline="True"/>
+                                        <assign variable="punti" expression="(vita-i*100+Size(combinazione)*1000-Size(coloriPOS)*50)/vita"/>
+                                        <output expression="&quot;hai totalizzato &quot;&amp;punti&amp;&quot; punti!&quot;" newline="True"/>
                                         <assign variable="vincitore" expression="players[x]"/>
                                     </else>
                                 </if>
@@ -207,11 +232,191 @@
                         </if>
                     </for>
                 </for>
-                <assign variable="fine" expression="true"/>
-                <output expression="&quot;tutti i player hanno esaurito le vite! avete perso!&quot;" newline="True"/>
+                <if expression="fine = false">
+                    <then>
+                        <assign variable="fine" expression="true"/>
+                        <output expression="&quot;tutti i player hanno esaurito le vite! avete perso!&quot;" newline="True"/>
+                        <call expression="tartLOSE()"/>
+                        <assign variable="vincitore" expression="&quot;&quot;"/>
+                    </then>
+                    <else/>
+                </if>
             </while>
-            <open expression="&quot;history.txt&quot;" mode="write"/>
-            <write expression="&quot;\n&quot;&amp;vincitore"/>
+            <if expression="vincitore == &quot;&quot;">
+                <then/>
+                <else>
+                    <call expression="tartWIN()"/>
+                    <if expression="punti &gt; hight">
+                        <then>
+                            <output expression="&quot;hai raggiunto un nuovo hight score!&quot;" newline="True"/>
+                            <open expression="&quot;champion.txt&quot;" mode="write"/>
+                            <write expression="punti"/>
+                            <write expression="vincitore"/>
+                            <close mode="read"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;continua a giocare per battere l'hight score di &quot;&amp;hight" newline="True"/>
+                        </else>
+                    </if>
+                    <assign variable="pos" expression="0"/>
+                    <open expression="&quot;history.txt&quot;" mode="write"/>
+                    <write expression="vincitore&amp;&quot; &quot;&amp;punti"/>
+                    <for variable="pos" start="0" end="tot-1" direction="inc" step="1">
+                        <write expression="scores[pos]"/>
+                    </for>
+                    <close mode="write"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="tartLOSE" type="None" variable="">
+        <parameters/>
+        <body>
+            <clear/>
+            <home/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <forward expression="30" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="70" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="70" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="40" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="40" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="70" pen="down"/>
+        </body>
+    </function>
+    <function name="tartSTART" type="None" variable="">
+        <parameters/>
+        <body>
+            <clear/>
+            <home/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <forward expression="10" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="35" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="70" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="up"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="135" rotate="left"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="135" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="90" rotate="right"/>
+            <forward expression="10" pen="up"/>
+            <forward expression="70" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="35" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="100" pen="down"/>
+        </body>
+    </function>
+    <function name="tartWIN" type="None" variable="">
+        <parameters/>
+        <body>
+            <clear/>
+            <home/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="200" pen="up"/>
+            <turn expression="60" rotate="right"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="left"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="110" rotate="left"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="110" rotate="right"/>
+            <forward expression="50" pen="down"/>
+            <turn expression="120" rotate="left"/>
+            <forward expression="100" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="100" pen="up"/>
+            <turn expression="120" rotate="left"/>
+            <forward expression="80" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="180" rotate="right"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="50" pen="up"/>
+            <turn expression="90" rotate="left"/>
+            <forward expression="90" pen="down"/>
+            <turn expression="140" rotate="right"/>
+            <forward expression="115" pen="down"/>
+            <turn expression="140" rotate="left"/>
+            <forward expression="90" pen="down"/>
         </body>
     </function>
 </flowgorithm>
