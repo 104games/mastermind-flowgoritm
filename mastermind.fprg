@@ -4,20 +4,21 @@
         <attribute name="name" value=""/>
         <attribute name="authors" value="Gabriella"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2024-01-12 03:33:03 "/>
+        <attribute name="saved" value="2024-01-12 03:38:06 "/>
         <attribute name="created" value="R2FicmllbGxhO0dBQlJJRUxMQTIwODE7MjAyNC0wMS0wNzsiMTA6NDI6NTggIjsyOTM2"/>
-        <attribute name="edited" value="R2FicmllbGxhO0dBQlJJRUxMQTIwODE7MjAyNC0wMS0wNzsiMDQ6Mzg6MjMgIjs2OzMwNDk="/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI2OjM5ICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMTsiMTA6NDM6MTAgIjtncmFmaWNhIHRhcnRhcnVnYSBMT1NFLmZwcmc7ODA4OQ=="/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI3OjQyICI7MTtnYXJpbWJnYWIwODtDMDItMjI7MjAyNC0wMS0xMTsiMTA6NDk6MzkgIjtzYXNhc2FzYXNhc2FzYXNhc2EuZnByZzs3OTA2"/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI4OjIxICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMDsiMDg6MTQ6MTMgIjtHcmFmaWNhIHRhcnRhcnVnYSBtYXN0ZXJtaW5kLmZwcmc7ODgyNg=="/>
-        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjMzOjAzICI7MjsyODY5"/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjM0OjM1ICI7MTtHYWJyaWVsbGE7R0FCUklFTExBMjA4MTsyMDI0LTAxLTA3OyIxMDo0Mjo1OCAiO21hc3Rlcm1pbmRBSVVULmZwcmc7Nzc4OA=="/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjM4OjA2ICI7MzsyODc4"/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
         <body>
-            <declare name="p, x, n, vita, punti, pos, tot, hight" type="Integer" array="False" size=""/>
-            <declare name="scopri" type="String" array="False" size=""/>
-            <declare name="fine" type="Boolean" array="False" size=""/>
+            <declare name="p, x, n, vita, punti, pos, tot, hight, helpRND" type="Integer" array="False" size=""/>
+            <declare name="scopri, help" type="String" array="False" size=""/>
+            <declare name="fine, aiuto" type="Boolean" array="False" size=""/>
+            <assign variable="aiuto" expression="false"/>
             <assign variable="fine" expression="false"/>
             <open expression="&quot;champion.txt&quot;" mode="read"/>
             <read variable="hight"/>
@@ -180,6 +181,21 @@
                     <for variable="x" start="0" end="p-1" direction="inc" step="1">
                         <if expression="fine == false">
                             <then>
+                                <if expression="aiuto == false">
+                                    <then>
+                                        <output expression="&quot;hai un aiuto disponibile! vuoi usarlo? l'aiuto sar&#224; noto a tutti i player, ma dimezzer&#224; il punteggio (inserito nella scoreboard) di chi vincer&#224;! (s/n)&quot;" newline="True"/>
+                                        <input variable="help"/>
+                                        <if expression="help == &quot;s&quot;">
+                                            <then>
+                                                <assign variable="aiuto" expression="true"/>
+                                                <assign variable="helpRND" expression="Random(Size(combinazione))"/>
+                                                <output expression="&quot;il colore &quot;&amp;combinazione[helpRND]&amp;&quot; &#232; alla posizione &quot;&amp;(helpRND+1)" newline="True"/>
+                                            </then>
+                                            <else/>
+                                        </if>
+                                    </then>
+                                    <else/>
+                                </if>
                                 <output expression="&quot;&#232; il turno di &quot;&amp;players[x]&amp;&quot;! inserisci la combinazione&quot;" newline="True"/>
                                 <input variable="inseritoTOT"/>
                                 <assign variable="y" expression="0"/>
@@ -223,6 +239,12 @@
                                         <assign variable="fine" expression="true"/>
                                         <output expression="&quot;BRAVO! &quot;&amp;players[x]&amp;&quot; sei il vincitore! grazie di aver giocato!&quot;" newline="True"/>
                                         <assign variable="punti" expression="(vita-i*100+Size(combinazione)*1000-Size(coloriPOS)*50)/vita"/>
+                                        <if expression="aiuto = true">
+                                            <then>
+                                                <assign variable="punti" expression="punti/2"/>
+                                            </then>
+                                            <else/>
+                                        </if>
                                         <output expression="&quot;hai totalizzato &quot;&amp;punti&amp;&quot; punti!&quot;" newline="True"/>
                                         <assign variable="vincitore" expression="players[x]"/>
                                     </else>
