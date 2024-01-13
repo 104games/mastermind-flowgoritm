@@ -4,13 +4,13 @@
         <attribute name="name" value=""/>
         <attribute name="authors" value="Gabriella"/>
         <attribute name="about" value=""/>
-        <attribute name="saved" value="2024-01-12 03:38:06 "/>
+        <attribute name="saved" value="2024-01-13 12:33:19 "/>
         <attribute name="created" value="R2FicmllbGxhO0dBQlJJRUxMQTIwODE7MjAyNC0wMS0wNzsiMTA6NDI6NTggIjsyOTM2"/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI2OjM5ICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMTsiMTA6NDM6MTAgIjtncmFmaWNhIHRhcnRhcnVnYSBMT1NFLmZwcmc7ODA4OQ=="/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI3OjQyICI7MTtnYXJpbWJnYWIwODtDMDItMjI7MjAyNC0wMS0xMTsiMTA6NDk6MzkgIjtzYXNhc2FzYXNhc2FzYXNhc2EuZnByZzs3OTA2"/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAyOjI4OjIxICI7MTt2aWNhcmlsb3IwODtDMDItMTA7MjAyNC0wMS0xMDsiMDg6MTQ6MTMgIjtHcmFmaWNhIHRhcnRhcnVnYSBtYXN0ZXJtaW5kLmZwcmc7ODgyNg=="/>
         <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjM0OjM1ICI7MTtHYWJyaWVsbGE7R0FCUklFTExBMjA4MTsyMDI0LTAxLTA3OyIxMDo0Mjo1OCAiO21hc3Rlcm1pbmRBSVVULmZwcmc7Nzc4OA=="/>
-        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTI7IjAzOjM4OjA2ICI7MzsyODc4"/>
+        <attribute name="edited" value="cGFvbGU7REVTS1RPUC1VMkxWRjI0OzIwMjQtMDEtMTM7IjEyOjMzOjE5ICI7NDsyODc5"/>
     </attributes>
     <function name="Main" type="None" variable="">
         <parameters/>
@@ -233,7 +233,12 @@
                                 <if expression="rossi &lt; Size(combinazione)">
                                     <then>
                                         <output expression="&quot;ci sei andato vicino! rossi: &quot;&amp;rossi&amp;&quot; &#236;, gialli: &quot;&amp;gialli" newline="True"/>
-                                        <output expression="&quot;ti rimangono &quot;&amp;i&amp;&quot; vite!&quot;" newline="True"/>
+                                        <if expression="vite&gt;0">
+                                            <then>
+                                                <output expression="&quot;ti rimangono &quot;&amp;i-1&amp;&quot; vite!&quot;" newline="True"/>
+                                            </then>
+                                            <else/>
+                                        </if>
                                     </then>
                                     <else>
                                         <assign variable="fine" expression="true"/>
